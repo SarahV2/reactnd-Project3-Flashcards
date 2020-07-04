@@ -39,4 +39,21 @@ export const fetchDecks = async () => {
     return await AsyncStorage.getItem(STORAGE_KEY)
 }
 
+export const addDeck = async (title) => {
+    newDeck = {
+        new: {
+            title: title,
+            questions: []
+        }
+    }
+    const currentList = await fetchDecks()
+    const updatedList = Object.assign(newDeck, currentList);
+    try{
+    return await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedList))
+    }
+    catch(e){
+        console.log(e)
+    }
+    // return updatedList
+}
 
