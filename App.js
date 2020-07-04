@@ -10,6 +10,9 @@ import { createAppContainer } from 'react-navigation'
 import { createMaterialTopTabNavigator, createBottomTabNavigator } from 'react-navigation-tabs'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
+import reducer from './reducers'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 const FlashCardsStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -63,11 +66,13 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <FlashCardsStatusBar backgroundColor={blue} barStyle='light-content' />
-        {/* <StatusBar style="auto" /> */}
-        <MainTabs />
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View style={{ flex: 1 }}>
+          <FlashCardsStatusBar backgroundColor={blue} barStyle='light-content' />
+          {/* <StatusBar style="auto" /> */}
+          <MainTabs />
+        </View>
+      </Provider>
     );
   }
 }

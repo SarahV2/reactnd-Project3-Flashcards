@@ -29,15 +29,21 @@ const data = {
 
 
 export const setInitialData = async () => {
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data))
-    return data
+     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+     return data
 }
 
 
 export const fetchDecks = async () => {
-    await setInitialData()
-    return await AsyncStorage.getItem(STORAGE_KEY)
+   
+   const entries= await AsyncStorage.getItem(STORAGE_KEY)
+   return await setInitialData(entries)
 }
+
+// export function fetchDecks () {
+//     return AsyncStorage.getItem(STORAGE_KEY)
+//       .then(res => setInitialData(res));
+//   };
 
 export const addDeck = async (title) => {
     newDeck = {
