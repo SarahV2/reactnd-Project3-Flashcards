@@ -15,9 +15,9 @@ export const Styles = StyleSheet.create({
         padding: 10,
         margin: 5,
         fontSize: 24,
-        width:250,
-        marginBottom:10,
-        textAlign:'center'
+        width: 250,
+        marginBottom: 10,
+        textAlign: 'center'
     },
     button: {
         backgroundColor: 'rgba(0,0,165,0.5)',
@@ -35,37 +35,44 @@ export const Styles = StyleSheet.create({
     buttonText: {
         fontSize: 20,
         color: '#000000',
-        textAlign:'center'
+        textAlign: 'center'
     },
     deckTitle: {
         borderRadius: 5,
         borderWidth: 2,
         fontSize: 20,
         padding: 10,
-        width:250,
-        margin:5,
-        textAlign:'center'
+        width: 250,
+        margin: 5,
+        textAlign: 'center'
     },
-    title:{
-        color:'rgb(255,100,200)',
-        fontWeight:'bold',
-        
-        fontSize:40
+    title: {
+        color: 'rgb(255,100,200)',
+        fontWeight: 'bold',
+
+        fontSize: 40
     },
-    subTitle:{
-        marginBottom:20
+    subTitle: {
+        marginBottom: 20
     },
-    deleteButton:{
-        color:'rgb(255,0,0)',
-        marginTop:10
+    deleteButton: {
+        color: 'rgb(255,0,0)',
+        marginTop: 10
     },
-    button:{
+    button: {
         borderRadius: 5,
         borderWidth: 2,
         fontSize: 20,
         padding: 10,
-        width:150,
-        marginBottom:5,
-        textAlign:'center'
+        width: 150,
+        marginBottom: 5,
+        textAlign: 'center'
     },
+    formContainer: {
+        marginTop: 30,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    }
 });

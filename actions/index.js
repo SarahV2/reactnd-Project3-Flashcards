@@ -1,5 +1,6 @@
 export const RECEIVE_ENTRIES = 'RECEIVE_ENTRIES'
 export const ADD_ENTRY = 'ADD_ENTRY'
+export const ADD_CARD='ADD_CARD'
 export const REMOVE_DECK = 'REMOVE_DECK'
 
 export const receiveEntries = (entries) => {
@@ -17,6 +18,14 @@ export const addEntry = (entry) => {
     return {
         type: ADD_ENTRY,
         entry,
+    }
+}
+
+export const addCard=(title,card)=>{
+    return{
+        type:ADD_CARD,
+        title,
+        card
     }
 }
 

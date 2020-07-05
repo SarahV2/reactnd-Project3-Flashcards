@@ -2,7 +2,6 @@ import React, { Component, useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import { Styles } from '../utils/styles'
 import { addDeck } from '../utils/api'
-import { NavigationActions } from 'react-navigation'
 import { addEntry } from '../actions'
 import { connect } from 'react-redux'
 

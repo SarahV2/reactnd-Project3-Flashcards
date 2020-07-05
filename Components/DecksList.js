@@ -29,7 +29,7 @@ class DecksList extends Component {
             <View style={Styles.container}>
                 <Text style={{fontSize:20 ,marginBottom:10}}>List Of Decks</Text>
                 {listOfDecks.map(deck => (
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate(
+                    <TouchableOpacity key={deck.title} onPress={() => this.props.navigation.navigate(
                         'Deck',
                         { title: deck.title }
                     )}>

@@ -1,4 +1,4 @@
-import { RECEIVE_ENTRIES, ADD_ENTRY, REMOVE_DECK } from '../actions'
+import { RECEIVE_ENTRIES, ADD_ENTRY, REMOVE_DECK, ADD_CARD } from '../actions'
 
 function entries(state = {}, action) {
     switch (action.type) {
@@ -8,9 +8,6 @@ function entries(state = {}, action) {
                 ...action.entries,
             }
         case ADD_ENTRY:
-            console.log('in reducer')
-            console.log(state)
-            console.log('that is it!')
             return {
                 ...state,
                 [action.entry]: {
@@ -18,7 +15,14 @@ function entries(state = {}, action) {
                     questions: []
                 }
             }
-
+        case ADD_CARD:
+            return {
+                ...state,
+                [action.title]: {
+                    ...state[action.title],
+                    questions: [...state[action.title].questions.concat(action.card)]
+                }
+            }
 
         default:
             return state
