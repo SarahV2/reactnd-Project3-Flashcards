@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { Styles } from '../utils/styles'
 import { fetchDecks } from '../utils/api'
 import { connect } from 'react-redux'
@@ -9,47 +9,36 @@ class DecksList extends Component {
         decks: ''
     }
     componentDidMount() {
-
-        // fetchDecks()
-        //     .then(results => {
-        //         console.log(results)
-        //         this.setState({ decks: results })
-        //     })
-
-            // the above works but isn't complete .. testing other stuff from UdaciFitness
-    const { dispatch } = this.props;
-    // console.log(this.props);
-    fetchDecks()
-      .then((entries) => { 
-         //console.log(entries)
-          dispatch(receiveEntries(entries))})
-      
-    //   .then(({ entries }) => {
-         
-        // if (!entries[timeToString()]) {
-        //   dispatch(
-        //     addEntry({
-        //       [timeToString()]: getDailyReminderValue(),
-        //     })
-        //   );
-        // }
-    //   })
+        const { dispatch } = this.props;
+        fetchDecks()
+            .then((entries) => {
+                dispatch(receiveEntries(entries))
+            })
 
     }
     render() {
-        const {entries}=this.props
-         console.log(entries)
-        // const { decks } = this.state
-        // for (var key in decks) {
-        //     if (decks.hasOwnProperty(key)) {
-        //         console.log(key);
-        //     }
-        // }
-        //const list=
+        const { entries } = this.props
+        let listOfDecks = [];
+        if (entries) {
+            for (let q in entries) {
+                var entry = entries[q]
+                listOfDecks.push(entry)
+            }
+        }
         return (
             <View style={Styles.container}>
-                <Text>View List Of Decks</Text>
-                
+                <Text style={{fontSize:20 ,marginBottom:10}}>List Of Decks</Text>
+                {listOfDecks.map(deck => (
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate(
+                        'Deck',
+                        { title: deck.title }
+                    )}>
+                        <Text style={Styles.deckTitle}>{deck.title}</Text>
+                    </TouchableOpacity>
+                ))}
+
+
+
             </View>
         )
     }

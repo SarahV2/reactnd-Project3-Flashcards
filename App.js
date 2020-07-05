@@ -6,6 +6,7 @@ import Constants from 'expo-constants'
 import { blue, white } from './utils/colors'
 import AddDeck from './Components/AddDeck';
 import DeckList from './Components/DecksList'
+import Deck from './Components/Deck'
 import { createAppContainer } from 'react-navigation'
 import { createMaterialTopTabNavigator, createBottomTabNavigator } from 'react-navigation-tabs'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
@@ -13,6 +14,13 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import reducer from './reducers'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { createStackNavigator } from 'react-navigation-stack'
+
+import { HeaderBackButton } from 'react-navigation-stack';
+import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux'
+import Main from './Components/Main'
+
 
 const FlashCardsStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -62,16 +70,34 @@ const MainTabs = createAppContainer(Platform.OS === 'ios' ?
   createBottomTabNavigator(Tabs, navigationOptions) :
   createMaterialTopTabNavigator(Tabs, navigationOptions))
 
+
+const MainNavigator = createAppContainer(createStackNavigator({
+  Home: {
+    screen: MainTabs,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Deck: {
+    screen: Deck,
+
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue,
+      },
+      headerLeft: (<HeaderBackButton
+        onPress={() => { NavigationActions.navigate({ routeName: MainNavigator }) }} />)
+    }
+  }
+}))
+
 export default class App extends React.Component {
 
   render() {
     return (
       <Provider store={createStore(reducer)}>
-        <View style={{ flex: 1 }}>
-          <FlashCardsStatusBar backgroundColor={blue} barStyle='light-content' />
-          {/* <StatusBar style="auto" /> */}
-          <MainTabs />
-        </View>
+        <Main />
       </Provider>
     );
   }

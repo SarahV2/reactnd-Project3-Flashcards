@@ -14,7 +14,10 @@ export const Styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
         margin: 5,
-        fontSize: 24
+        fontSize: 24,
+        width:250,
+        marginBottom:10,
+        textAlign:'center'
     },
     button: {
         backgroundColor: 'rgba(0,0,165,0.5)',
@@ -26,17 +29,43 @@ export const Styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20,
         padding: 10,
-        marginTop: 10
+        marginTop: 10,
 
     },
     buttonText: {
         fontSize: 20,
-        color: '#FFFFFF'
+        color: '#000000',
+        textAlign:'center'
     },
     deckTitle: {
-        borderRadius: 3,
+        borderRadius: 5,
         borderWidth: 2,
         fontSize: 20,
-        padding: 20
-    }
+        padding: 10,
+        width:250,
+        margin:5,
+        textAlign:'center'
+    },
+    title:{
+        color:'rgb(255,100,200)',
+        fontWeight:'bold',
+        
+        fontSize:40
+    },
+    subTitle:{
+        marginBottom:20
+    },
+    deleteButton:{
+        color:'rgb(255,0,0)',
+        marginTop:10
+    },
+    button:{
+        borderRadius: 5,
+        borderWidth: 2,
+        fontSize: 20,
+        padding: 10,
+        width:150,
+        marginBottom:5,
+        textAlign:'center'
+    },
 });

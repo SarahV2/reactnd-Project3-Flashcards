@@ -1,15 +1,16 @@
 import React, { Component, useState } from 'react'
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import { Styles } from '../utils/styles'
 import { addDeck } from '../utils/api'
 import { NavigationActions } from 'react-navigation'
+import { addEntry } from '../actions'
+import { connect } from 'react-redux'
 
-export default class AddDeck extends Component {
+class AddDeck extends Component {
 
     state = {
         newDeckName: ''
     }
-
 
     handleChange = (input) => {
         console.log(input)
@@ -17,31 +18,39 @@ export default class AddDeck extends Component {
 
     }
 
-    handlePress = async() => {
-        // alert(this.state.newDeckName)
+    handlePress = async () => {
+        const newTitle = this.state.newDeckName
 
+        // Update Redux
+        await this.props.dispatch(addEntry(
+            newTitle))
         // Send to DB
-        await addDeck(this.state.newDeckName)
+        await addDeck(newTitle)
 
         console.log('added')
-        this.toHome()
+
+        this.toHome(newTitle)
+
+        this.setState({ newDeckName: '' })
     }
-    toHome = () => {
-        this.props.navigation.dispatch(NavigationActions.back({
-            key: 'AddDeck'
-        }))
+    toHome = (title) => {
+        this.props.navigation.navigate(
+            'Deck',
+            { title }
+        )
     }
     render() {
         return (
-            <View style={Styles.container}>
+            <KeyboardAvoidingView behavior='padding' style={Styles.container}>
                 <Text>Add a new Deck</Text>
                 <TextInput onChangeText={(text) => this.handleChange(text)}
-                    style={Styles.inputField} placeholder='New Deck Name' />
+                    style={Styles.inputField} placeholder='New Deck Name'
+                    value={this.state.newDeckName} />
                 <TouchableOpacity style={Styles.button} onPress={this.handlePress}>
-                    <Text style={Styles.buttonText}>Add</Text>
+                    <Text style={Styles.buttonText}>Create Deck</Text>
                 </TouchableOpacity>
-
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
+export default connect()(AddDeck)

@@ -29,21 +29,45 @@ const data = {
 
 
 export const setInitialData = async () => {
-     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data))
-     return data
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+    return data
 }
 
 
 export const fetchDecks = async () => {
-   
-   const entries= await AsyncStorage.getItem(STORAGE_KEY)
-   return await setInitialData(entries)
+
+    const decks = await AsyncStorage.getItem(STORAGE_KEY)
+    return await setInitialData(decks)
 }
 
-// export function fetchDecks () {
-//     return AsyncStorage.getItem(STORAGE_KEY)
-//       .then(res => setInitialData(res));
-//   };
+export const getDeck = async (title) => {
+    const decks = await AsyncStorage.getItem(STORAGE_KEY)
+    console.log('in getdeck method')
+    //console.log('updated')
+
+    const tdecks = JSON.parse(decks)
+    for (let u in tdecks) {
+        var user = tdecks[u]
+        if (user.title === title) {
+            //console.log(user)
+            return user
+        }
+    }
+
+}
+
+export const deleteDeck = async (title) => {
+    const decks = JSON.parse(await AsyncStorage.getItem(STORAGE_KEY));
+    for (let d in decks) {
+        var deck = decks[d]
+        if (deck.title === title) {
+            decks[d] = undefined
+            delete decks[d]
+            return await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
+        }
+    }
+}
+
 
 export const addDeck = async (title) => {
     newDeck = {
@@ -54,12 +78,11 @@ export const addDeck = async (title) => {
     }
     const currentList = await fetchDecks()
     const updatedList = Object.assign(newDeck, currentList);
-    try{
-    return await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedList))
+    try {
+        return await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedList))
     }
-    catch(e){
+    catch (e) {
         console.log(e)
     }
-    // return updatedList
 }
 

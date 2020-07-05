@@ -1,4 +1,4 @@
-import { RECEIVE_ENTRIES, ADD_ENTRY } from '../actions'
+import { RECEIVE_ENTRIES, ADD_ENTRY, REMOVE_DECK } from '../actions'
 
 function entries(state = {}, action) {
     switch (action.type) {
@@ -8,13 +8,24 @@ function entries(state = {}, action) {
                 ...action.entries,
             }
         case ADD_ENTRY:
+            console.log('in reducer')
+            console.log(state)
+            console.log('that is it!')
             return {
                 ...state,
-                ...action.entry
+                [action.entry]: {
+                    title: action.entry,
+                    questions: []
+                }
             }
+
+
         default:
             return state
     }
 }
 
+const findDeck = (title) => {
+
+}
 export default entries
