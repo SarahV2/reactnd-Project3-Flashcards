@@ -15,5 +15,5 @@ This app was created using ```create-react-native-app``` and tested using expo o
 The app allows the users to do the following:
 * Add Decks
 * Add cards to decks
-* Take quiz in a chosen category (deck) and get a score 
+* Take a quiz in a chosen category (deck) and get a score
 
