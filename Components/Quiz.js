@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, } from 'react-native'
+import { View, Text } from 'react-native'
 import { Styles } from '../utils/styles'
 import { getDeck } from '../utils/api'
 import { connect } from 'react-redux'
@@ -43,7 +43,6 @@ class Quiz extends Component {
     }
 
     handleCorrectAnswer = () => {
-
         this.setState(prevState => {
             return {
                 ...prevState,
@@ -62,6 +61,7 @@ class Quiz extends Component {
         }
 
     }
+
     handleIncorrectAnswer = () => {
         this.setState(prevState => {
             return {
@@ -146,8 +146,6 @@ class Quiz extends Component {
                         </View>
                     )}
                 </View>
-
-
             </View>
         )
     }

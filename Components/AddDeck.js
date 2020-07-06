@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import { Styles } from '../utils/styles'
 import { addDeck } from '../utils/api'
-import { addEntry } from '../actions'
+import { addDeckToList } from '../actions'
 import { connect } from 'react-redux'
 
 class AddDeck extends Component {
@@ -21,7 +21,7 @@ class AddDeck extends Component {
         const newTitle = this.state.newDeckName
 
         // Update Redux
-        await this.props.dispatch(addEntry(
+        await this.props.dispatch(addDeckToList(
             newTitle))
         // Send to DB
         await addDeck(newTitle)

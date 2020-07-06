@@ -1,17 +1,17 @@
-import { RECEIVE_ENTRIES, ADD_ENTRY, REMOVE_DECK, ADD_CARD } from '../actions'
+import { RECEIVE_DECKS, ADD_DECK, ADD_CARD } from '../actions'
 
-function entries(state = {}, action) {
+function decks(state = {}, action) {
     switch (action.type) {
-        case RECEIVE_ENTRIES:
+        case RECEIVE_DECKS:
             return {
                 ...state,
-                ...action.entries,
+                ...action.decks,
             }
-        case ADD_ENTRY:
+        case ADD_DECK:
             return {
                 ...state,
-                [action.entry]: {
-                    title: action.entry,
+                [action.title]: {
+                    title: action.title,
                     questions: []
                 }
             }
@@ -29,7 +29,5 @@ function entries(state = {}, action) {
     }
 }
 
-const findDeck = (title) => {
 
-}
-export default entries
+export default decks

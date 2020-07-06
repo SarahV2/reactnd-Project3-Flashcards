@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, FlatList } from 'react-native'
 import { Styles } from '../utils/styles'
 import { fetchDecks } from '../utils/api'
 import { connect } from 'react-redux'
-import { receiveEntries, addEntry } from '../actions';
+import { receiveDecks} from '../actions';
 class DecksList extends Component {
     state = {
         decks: ''
@@ -11,18 +11,18 @@ class DecksList extends Component {
     componentDidMount() {
         const { dispatch } = this.props;
         fetchDecks()
-            .then((entries) => {
-                dispatch(receiveEntries(entries))
+            .then((results) => {
+                dispatch(receiveDecks(results))
             })
 
     }
     render() {
-        const { entries } = this.props
+        const { decks } = this.props
         let listOfDecks = [];
-        if (entries) {
-            for (let q in entries) {
-                var entry = entries[q]
-                listOfDecks.push(entry)
+        if (decks) {
+            for (let q in decks) {
+                var deck = decks[q]
+                listOfDecks.push(deck)
             }
         }
         return (
@@ -44,6 +44,6 @@ class DecksList extends Component {
     }
 }
 
-const mapStateToProps = (entries) => ({ entries });
+const mapStateToProps = (decks) => ({ decks });
 
 export default connect(mapStateToProps)(DecksList)

@@ -1,29 +1,24 @@
-export const RECEIVE_ENTRIES = 'RECEIVE_ENTRIES'
-export const ADD_ENTRY = 'ADD_ENTRY'
-export const ADD_CARD='ADD_CARD'
-export const REMOVE_DECK = 'REMOVE_DECK'
+export const RECEIVE_DECKS = 'RECEIVE_DECKS'
+export const ADD_DECK = 'ADD_DECK'
+export const ADD_CARD = 'ADD_CARD'
 
-export const receiveEntries = (entries) => {
-    console.log(entries)
+export const receiveDecks = (decks) => {
     return {
-        type: RECEIVE_ENTRIES,
-        entries,
+        type: RECEIVE_DECKS,
+        decks,
     }
 }
 
-export const addEntry = (entry) => {
-    console.log('in action')
-    console.log(entry)
-
+export const addDeckToList = (title) => {
     return {
-        type: ADD_ENTRY,
-        entry,
+        type: ADD_DECK,
+        title,
     }
 }
 
-export const addCard=(title,card)=>{
-    return{
-        type:ADD_CARD,
+export const addCard = (title, card) => {
+    return {
+        type: ADD_CARD,
         title,
         card
     }
