@@ -62,7 +62,7 @@ class AddCard extends Component {
                 keyboardVerticalOffset={Platform.select({ ios: 120, android: 500 })}
                 enabled>
                 <View style={Styles.container}>
-                    <Text style={{ paddingTop:30,marginTop:10,fontSize: 20, padding: 10}}>Add a new question</Text>
+                    <Text style={{ paddingTop: 30, marginTop: 10, fontSize: 20, padding: 10 }}>Add a new question</Text>
 
                     <TextInput onChangeText={(text) => { this.handleChange(text, 'question') }}
                         style={Styles.inputField} placeholder='New Question'

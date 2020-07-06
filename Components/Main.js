@@ -8,7 +8,7 @@ import DeckList from './DecksList'
 import Deck from './Deck'
 import { createAppContainer } from 'react-navigation'
 import { createMaterialTopTabNavigator, createBottomTabNavigator } from 'react-navigation-tabs'
-import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { MaterialIcons } from '@expo/vector-icons';
 import { createStackNavigator } from 'react-navigation-stack'
 import { HeaderBackButton } from 'react-navigation-stack';
 import { connect } from 'react-redux'
@@ -38,14 +38,14 @@ const Tabs = {
         screen: DeckList,
         navigationOptions: {
             tabBarLabel: 'Decks',
-            tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
+            tabBarIcon: ({ tintColor }) => <MaterialIcons name='library-books' size={30} color={tintColor} />
         }
     },
     AddDeck: {
         screen: AddDeck,
         navigationOptions: {
             tabBarLabel: 'New Deck',
-            tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+            tabBarIcon: ({ tintColor }) => <MaterialIcons name='add-box' size={30} color={tintColor} />
 
         }
     }
