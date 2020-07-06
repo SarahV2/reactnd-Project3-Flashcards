@@ -12,25 +12,27 @@ class AddDeck extends Component {
     }
 
     handleChange = (input) => {
-        console.log(input)
+
         this.setState({ newDeckName: input })
 
     }
 
     handlePress = async () => {
+        const { dispatch } = this.props
         const newTitle = this.state.newDeckName
 
         // Update Redux
-        await this.props.dispatch(addDeckToList(
-            newTitle))
-        // Send to DB
+        dispatch(addDeckToList(newTitle))
+
+        // Save to Storage
         await addDeck(newTitle)
 
-        console.log('added')
+        // Clear Input Field
+        this.setState({ newDeckName: '' })
 
+        // Navigate 
         this.toHome(newTitle)
 
-        this.setState({ newDeckName: '' })
     }
     toHome = (title) => {
         this.props.navigation.navigate(

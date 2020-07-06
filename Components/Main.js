@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants'
 import { blue, white } from '../utils/colors'
@@ -10,14 +10,8 @@ import Deck from './Deck'
 import { createAppContainer } from 'react-navigation'
 import { createMaterialTopTabNavigator, createBottomTabNavigator } from 'react-navigation-tabs'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
-
-import reducer from '../reducers'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
 import { createStackNavigator } from 'react-navigation-stack'
-
 import { HeaderBackButton } from 'react-navigation-stack';
-import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux'
 import AddCard from './AddCard';
 import Quiz from './Quiz'
@@ -106,8 +100,6 @@ class Main extends React.Component {
 
             <View style={{ flex: 1 }}>
                 <FlashCardsStatusBar backgroundColor={blue} barStyle='light-content' />
-                {/* <StatusBar style="auto" /> */}
-                {/* <MainTabs /> */}
                 <MainNavigator />
             </View>
 
