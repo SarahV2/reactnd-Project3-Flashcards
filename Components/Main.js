@@ -20,6 +20,7 @@ import { HeaderBackButton } from 'react-navigation-stack';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux'
 import AddCard from './AddCard';
+import Quiz from './Quiz'
 
 
 const FlashCardsStatusBar = ({ backgroundColor, ...props }) => {
@@ -80,7 +81,7 @@ const MainNavigator = createAppContainer(createStackNavigator({
     Deck: {
         screen: Deck,
         navigationOptions: ({ navigation }) => ({
-            headerLeft: (<HeaderBackButton tintColor={'#FFFFFF' } onPress={_ => navigation.navigate('DeckList')} />),
+            headerLeft: (<HeaderBackButton tintColor={'#FFFFFF'} onPress={_ => navigation.navigate('DeckList')} />),
             headerTintColor: white,
             headerStyle: {
                 backgroundColor: blue,
@@ -88,8 +89,11 @@ const MainNavigator = createAppContainer(createStackNavigator({
 
         })
     },
-    AddCard:{
-        screen:AddCard
+    AddCard: {
+        screen: AddCard
+    },
+    Quiz: {
+        screen: Quiz,
     }
 }))
 

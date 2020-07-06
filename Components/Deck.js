@@ -29,7 +29,7 @@ class Deck extends Component {
         // })
     }
 
- 
+
 
     static navigationOptions = ({ navigation }) => {
         const { title } = navigation.state.params
@@ -39,7 +39,7 @@ class Deck extends Component {
     }
 
     handlePress = () => {
-      //  const {  } = navigation.state.params
+        //  const {  } = navigation.state.params
 
         // const navigation = useNavigation();
         // navigation.navigate("AddCard")
@@ -47,15 +47,21 @@ class Deck extends Component {
         // this.props.navigation.navigate(
         //     'AddCard',
         //     { title })
-        const {addCard}=this.props
+        const { addCard } = this.props
         addCard()
+    }
+    startQuiz = () => {
+       const  { navigation, title }=this.props
+        navigation.navigate(
+            'Quiz',
+            { title })
     }
 
     render() {
-        
+
         //const { deck, numOfCards } = this.state
-        const {title}=this.props
-        const {numOfCards}=this.props
+        const { title } = this.props
+        const { numOfCards } = this.props
 
         return (
             <View style={Styles.container}>
@@ -66,7 +72,7 @@ class Deck extends Component {
                     <Text style={Styles.button}>Add Card</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity >
+                <TouchableOpacity onPress={this.startQuiz} >
                     {numOfCards > 1 &&
                         <Text style={[Styles.button, { backgroundColor: '#000000', color: '#FFFFFF' }]} >Start Quiz</Text>}
                 </TouchableOpacity>
@@ -79,7 +85,7 @@ class Deck extends Component {
 
 const mapStateToProps = (state, { navigation }) => {
     const { title } = navigation.state.params
-    const numOfCards=state[title].questions.length;
+    const numOfCards = state[title].questions.length;
     //const {numOfCards}=
 
     // getDeck(title).then(result => {
@@ -91,13 +97,13 @@ const mapStateToProps = (state, { navigation }) => {
     //         title,
     //         deck:result,
     //         numOfCards:result.questions.length
-    
+
     //     }
     // })
     return {
         title,
         numOfCards
-        
+
 
     }
 

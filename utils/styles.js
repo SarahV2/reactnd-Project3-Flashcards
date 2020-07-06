@@ -74,5 +74,9 @@ export const Styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
 
+    },
+    quizHeader:{
+        fontSize:30,
+        marginTop:50
     }
 });
