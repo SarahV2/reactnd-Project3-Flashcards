@@ -3,10 +3,10 @@ import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'r
 import { Styles } from '../utils/styles'
 
 export default function Button(props) {
-    const { text, color, onPress,backgroundColor } = props
+    const { text, color, onPress,backgroundColor,specialStyling } = props
     console.log(text)
     return (
-        <TouchableOpacity style={[Styles.button,{backgroundColor}]} onPress={onPress}>
+        <TouchableOpacity style={[Styles.button,{backgroundColor,specialStyling}]} onPress={onPress}>
             <Text style={Styles.buttonText}>{text}</Text>
         </TouchableOpacity>
     )

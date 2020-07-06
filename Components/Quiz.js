@@ -32,7 +32,14 @@ class Quiz extends Component {
     }
 
     showAnswer = () => {
-        this.setState({ showAnswer: true })
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                showAnswer: true,
+                remainingQuestions: prevState.remainingQuestions - 1
+            }
+
+        })
     }
 
     handleCorrectAnswer = () => {
@@ -43,12 +50,11 @@ class Quiz extends Component {
                 correctAnswers: prevState.correctAnswers + 1,
                 numOfAnsweredQ: prevState.numOfAnsweredQ + 1,
                 score: prevState.score + 1,
-                remainingQuestions: prevState.remainingQuestions - 1,
                 showAnswer: !prevState.showAnswer
             }
         })
         const { remainingQuestions } = this.state
-        if (remainingQuestions === 1) {
+        if (remainingQuestions === 0) {
             this.setState({ showScore: true })
         }
         else {
@@ -57,6 +63,20 @@ class Quiz extends Component {
 
     }
     handleIncorrectAnswer = () => {
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                numOfAnsweredQ: prevState.numOfAnsweredQ + 1,
+                showAnswer: !prevState.showAnswer
+            }
+        })
+        const { remainingQuestions } = this.state
+        if (remainingQuestions === 0) {
+            this.setState({ showScore: true })
+        }
+        else {
+            this.getNextQuestion()
+        }
 
     }
 
@@ -105,13 +125,16 @@ class Quiz extends Component {
                         <View style={{ flex: 1, alignItems: 'center' }}>
                             <Text style={{ padding: 10, fontSize: 20 }}>{currentQuestion.answer}</Text>
                             <Button text='Correct' backgroundColor='rgb(0,255,50)' onPress={this.handleCorrectAnswer} />
-                            <Button text='Incorrect' backgroundColor='rgb(255,0,0)' onPress={this.handleIncorrectAnswer} />
+                            <Button text='Incorrect' backgroundColor='rgb(255,0,0)' specialStyling='marginBottom:0' onPress={this.handleIncorrectAnswer} />
 
                         </View>
                     )}
 
                     {showScore == false && (
-                        <Text>{remainingQuestions} questions remaining</Text>
+                        <View style={{ flex: 1, alignItems: 'center' }}>
+                            <Text style={{ marginTop: 50 }}>
+                                {remainingQuestions} {remainingQuestions <= 1 ? 'question' : 'questions'} remaining</Text>
+                        </View>
                     )}
 
                     {showScore == true && (
