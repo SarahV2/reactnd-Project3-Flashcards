@@ -84,5 +84,9 @@ export const Styles = StyleSheet.create({
         fontWeight:'bold',
         marginTop:50,
         marginBottom:5
+    },
+    scrollView:{
+        marginTop:50,
+        textAlign:'center'
     }
 });

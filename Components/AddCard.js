@@ -58,22 +58,26 @@ class AddCard extends Component {
 
     render() {
         return (
-            <KeyboardAvoidingView behavior='padding' style={Styles.container}>
-                <Text style={{ fontSize: 20, marginBottom: 10 }}>Add a new question</Text>
+            <KeyboardAvoidingView behavior='padding' style={Styles.container}
+                keyboardVerticalOffset={Platform.select({ ios: 120, android: 500 })}
+                enabled>
+                <View style={Styles.container}>
+                    <Text style={{ paddingTop:30,marginTop:10,fontSize: 20, padding: 10}}>Add a new question</Text>
 
-                <TextInput onChangeText={(text) => { this.handleChange(text, 'question') }}
-                    style={Styles.inputField} placeholder='New Question'
-                    value={this.state.question}
-                />
+                    <TextInput onChangeText={(text) => { this.handleChange(text, 'question') }}
+                        style={Styles.inputField} placeholder='New Question'
+                        value={this.state.question}
+                    />
 
-                <TextInput onChangeText={(text) => { this.handleChange(text, 'answer') }}
-                    style={Styles.inputField} placeholder='Answer'
-                    value={this.state.answer}
-                />
+                    <TextInput onChangeText={(text) => { this.handleChange(text, 'answer') }}
+                        style={Styles.inputField} placeholder='Answer'
+                        value={this.state.answer}
+                    />
 
-                <TouchableOpacity style={Styles.button} onPress={this.handlePress}>
-                    <Text style={Styles.buttonText}>Add Card</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity style={Styles.button} onPress={this.handlePress}>
+                        <Text style={Styles.buttonText}>Add Card</Text>
+                    </TouchableOpacity>
+                </View>
             </KeyboardAvoidingView>
         )
     }

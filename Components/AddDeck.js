@@ -8,12 +8,13 @@ import { connect } from 'react-redux'
 class AddDeck extends Component {
 
     state = {
-        newDeckName: ''
+        newDeckName: '',
+        inputError: false
     }
 
     handleChange = (input) => {
 
-        this.setState({ newDeckName: input })
+        this.setState({ newDeckName: input, inputError: false })
 
     }
 
@@ -21,17 +22,27 @@ class AddDeck extends Component {
         const { dispatch } = this.props
         const newTitle = this.state.newDeckName
 
-        // Update Redux
-        dispatch(addDeckToList(newTitle))
+        if (!!newTitle.trim()) {
 
-        // Save to Storage
-        await addDeck(newTitle)
+            // Update Redux
+            dispatch(addDeckToList(newTitle))
 
-        // Clear Input Field
-        this.setState({ newDeckName: '' })
+            // Save to Storage
+            await addDeck(newTitle)
 
-        // Navigate 
-        this.toHome(newTitle)
+            // Clear Input Field
+            this.setState({
+                newDeckName: '',
+                inputError: false
+            })
+
+            // Navigate 
+            this.toHome(newTitle)
+        }
+
+        else {
+            this.setState({ inputError: true, newDeckName: '' })
+        }
 
     }
     toHome = (title) => {
@@ -41,12 +52,14 @@ class AddDeck extends Component {
         )
     }
     render() {
+        const { inputError } = this.state
         return (
             <KeyboardAvoidingView behavior='padding' style={Styles.container}>
-                <Text>Add a new Deck</Text>
+                <Text style={{ fontSize: 20, }}>Add a new Deck</Text>
                 <TextInput onChangeText={(text) => this.handleChange(text)}
                     style={Styles.inputField} placeholder='New Deck Name'
                     value={this.state.newDeckName} />
+                {inputError && (<Text style={{ color: 'rgb(255,0,0)' }}>Please Input a valid name</Text>)}
                 <TouchableOpacity style={Styles.button} onPress={this.handlePress}>
                     <Text style={Styles.buttonText}>Create Deck</Text>
                 </TouchableOpacity>

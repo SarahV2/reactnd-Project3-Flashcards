@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 import AddCard from './AddCard';
 import Quiz from './Quiz'
 
-const blue = '#4e4cb8'
+const purple = '#4e4cb8'
 const white = '#FFFFFF'
 
 const FlashCardsStatusBar = ({ backgroundColor, ...props }) => {
@@ -29,7 +29,7 @@ const FlashCardsStatusBar = ({ backgroundColor, ...props }) => {
 const sharedHeaderStyle = {
     headerTintColor: white,
     headerStyle: {
-        backgroundColor: blue,
+        backgroundColor: purple,
     }
 }
 
@@ -56,7 +56,7 @@ const navigationOptions = {
         activeTintColor: Platform.OS === 'ios' ? white : white,
         style: {
             height: 56,
-            backgroundColor: Platform.OS === 'ios' ? blue : blue,
+            backgroundColor: purple,
             shadowColor: 'rgba(0,0,0,0.24)',
             shadowOffset: {
                 width: 0,
@@ -86,7 +86,7 @@ const MainNavigator = createAppContainer(createStackNavigator({
             headerLeft: (<HeaderBackButton tintColor={'#FFFFFF'} onPress={_ => navigation.navigate('DeckList')} />),
             headerTintColor: white,
             headerStyle: {
-                backgroundColor: blue,
+                backgroundColor: purple,
             },
 
         })
@@ -108,7 +108,7 @@ class Main extends React.Component {
         return (
 
             <View style={{ flex: 1 }}>
-                <FlashCardsStatusBar backgroundColor={blue} barStyle='light-content' />
+                <FlashCardsStatusBar backgroundColor={purple} barStyle='light-content' />
                 <MainNavigator />
             </View>
 

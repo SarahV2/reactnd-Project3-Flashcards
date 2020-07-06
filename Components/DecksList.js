@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, FlatList, SafeAreaView, ScrollView } from 'react-native'
 import { Styles } from '../utils/styles'
 import { fetchDecks } from '../utils/api'
 import { connect } from 'react-redux'
@@ -28,17 +28,19 @@ class DecksList extends Component {
             }
         }
         return (
-            <View style={Styles.container}>
-                <Text style={{ fontSize: 20, marginBottom: 10 }}>Choose a Deck</Text>
-                {listOfDecks.map(deck => (
-                    <TouchableOpacity key={deck.title} onPress={() => this.props.navigation.navigate(
-                        'Deck',
-                        { title: deck.title }
-                    )}>
-                        <Text style={Styles.deckTitle}>{deck.title}</Text>
-                    </TouchableOpacity>
-                ))}
-            </View>
+            <SafeAreaView style={Styles.container}>
+                <ScrollView style={{ marginTop: 50 }}>
+                    <Text style={{ fontSize: 20, marginBottom: 10, alignSelf: 'center' }}>Choose a Deck</Text>
+                    {listOfDecks.map(deck => (
+                        <TouchableOpacity key={deck.title} onPress={() => this.props.navigation.navigate(
+                            'Deck',
+                            { title: deck.title }
+                        )}>
+                            <Text style={Styles.deckTitle}>{deck.title}</Text>
+                        </TouchableOpacity>
+                    ))}
+                </ScrollView>
+            </SafeAreaView>
         )
     }
 }

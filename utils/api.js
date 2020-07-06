@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 
-const STORAGE_KEY = '@decks'
+const STORAGE_KEY = 'decks'
 
 const data = {
     React: {
@@ -40,7 +40,7 @@ export const fetchDecks = async () => {
 
 export const getDeck = async (title) => {
     const list = await AsyncStorage.getItem(STORAGE_KEY)
-    const decks=JSON.parse(list)
+    const decks = JSON.parse(list)
     for (let d in decks) {
         var deck = decks[d]
         if (deck.title === title) {
