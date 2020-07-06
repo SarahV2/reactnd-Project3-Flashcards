@@ -6,8 +6,10 @@
 This app was created using ```create-react-native-app``` and tested using expo on ios
 
  ## Installation & Run
-install the project dependencies by using the command ```yarn install``` in the terminal
-and then start the server by using the command ```expo start``` (you can install expo using ```npm install -g expo-cli```)
+* Install the project dependencies by using the command ```yarn install``` in the terminal
+* Start the server by using the command ```expo start``` (if expo isn't already installed, you can install it using ```npm install -g expo-cli```)
+* Install and open expo on your mobile device, and then scan the barcode shown in your terminal (or you can manually enter the address starting with 'exp://' on safari and then open the app using expo)
+
 
 ## Functionality
 The app allows the users to do the following:
