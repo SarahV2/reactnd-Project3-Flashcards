@@ -3,7 +3,7 @@
  
  
  ## About
-This app was created using ```create-react-native-app``` and tested using expo with ios
+This app was created using ```create-react-native-app``` and tested using expo on ios
 
  ## Installation & Run
 install the project dependencies by using the command ```yarn install``` or ```npm install``` in the terminal
