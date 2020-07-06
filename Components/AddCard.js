@@ -4,7 +4,6 @@ import { Styles } from '../utils/styles'
 import { addCardToDeck } from '../utils/api'
 import { addCard } from '../actions'
 import { connect } from 'react-redux'
-import AddDeck from './AddDeck'
 
 class AddCard extends Component {
 
@@ -19,40 +18,36 @@ class AddCard extends Component {
             title
         }
     }
-    handleChange = (text, name) => {
 
+    handleChange = (text, name) => {
         this.setState({ [name]: text })
     }
 
     handlePress = async () => {
+
         const { dispatch } = this.props
         const { question, answer } = this.state
         const { title } = this.props
-        console.log(question)
-        console.log(answer)
+
         const card = {
             question,
             answer
         }
-        console.log(card)
+
+        // Save to Storage
         await addCardToDeck(title, card)
+
+        // Update Redux
+        await dispatch(addCard(title, card))
+
+        // Empty Input Fields
         this.setState({
             question: '',
             answer: ''
         })
-        // // Update Redux
-        await dispatch(addCard(title, card))
-        // // Send to DB
-        // await addDeck(newTitle)
 
-        // console.log('added')
-
+        // Navigate back to the deck screen
         this.toHome(title)
-        //this.props.goBack()
-
-        // this.setState({ newDeckName: '' })
-
-        //addCardToDeck(this.props.title)
     }
     toHome = (title) => {
         this.props.navigation.navigate(
@@ -86,12 +81,9 @@ class AddCard extends Component {
 
 const mapStateToProps = (state, { navigation }) => {
     const { title } = navigation.state.params
-
     return {
         title,
-
     }
-
 }
 
 const mapDispatchToProps = dispatch => ({

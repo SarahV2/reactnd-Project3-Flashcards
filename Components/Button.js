@@ -1,12 +1,12 @@
 import React from 'react'
-import { View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import { Styles } from '../utils/styles'
 
 export default function Button(props) {
-    const { text, color, onPress, backgroundColor, specialStyling } = props
+    const { text, color, onPress, backgroundColor } = props
     console.log(text)
     return (
-        <TouchableOpacity style={[Styles.button, { backgroundColor }]} onPress={onPress}>
+        <TouchableOpacity style={[Styles.button, { backgroundColor}]} onPress={onPress}>
             <Text style={Styles.buttonText}>{text}</Text>
         </TouchableOpacity>
     )

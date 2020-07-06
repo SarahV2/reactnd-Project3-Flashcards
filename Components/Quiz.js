@@ -125,7 +125,7 @@ class Quiz extends Component {
                         <View style={{ flex: 1, alignItems: 'center' }}>
                             <Text style={{ padding: 10, fontSize: 20 }}>{currentQuestion.answer}</Text>
                             <Button text='Correct' backgroundColor='rgb(0,255,50)' onPress={this.handleCorrectAnswer} />
-                            <Button text='Incorrect' backgroundColor='rgb(255,0,0)' specialStyling='marginBottom:0' onPress={this.handleIncorrectAnswer} />
+                            <Button text='Incorrect' backgroundColor='rgb(255,0,0)' onPress={this.handleIncorrectAnswer} />
 
                         </View>
                     )}
