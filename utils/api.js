@@ -39,7 +39,8 @@ export const fetchDecks = async () => {
 }
 
 export const getDeck = async (title) => {
-    const decks = await JSON.parse(AsyncStorage.getItem(STORAGE_KEY))
+    const list = await AsyncStorage.getItem(STORAGE_KEY)
+    const decks=JSON.parse(list)
     for (let d in decks) {
         var deck = decks[d]
         if (deck.title === title) {

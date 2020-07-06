@@ -29,7 +29,7 @@ class DecksList extends Component {
         }
         return (
             <View style={Styles.container}>
-                <Text style={{ fontSize: 20, marginBottom: 10 }}>List Of Decks</Text>
+                <Text style={{ fontSize: 20, marginBottom: 10 }}>Choose a Deck</Text>
                 {listOfDecks.map(deck => (
                     <TouchableOpacity key={deck.title} onPress={() => this.props.navigation.navigate(
                         'Deck',

@@ -3,7 +3,6 @@ import React from 'react';
 import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants'
-import { blue, white } from '../utils/colors'
 import AddDeck from './AddDeck';
 import DeckList from './DecksList'
 import Deck from './Deck'
@@ -16,6 +15,8 @@ import { connect } from 'react-redux'
 import AddCard from './AddCard';
 import Quiz from './Quiz'
 
+const blue = '#4e4cb8'
+const white = '#FFFFFF'
 
 const FlashCardsStatusBar = ({ backgroundColor, ...props }) => {
     return (
@@ -23,6 +24,13 @@ const FlashCardsStatusBar = ({ backgroundColor, ...props }) => {
             <StatusBar translucent backgroundColor={backgroundColor} {...props} />
         </View>
     )
+}
+
+const sharedHeaderStyle = {
+    headerTintColor: white,
+    headerStyle: {
+        backgroundColor: blue,
+    }
 }
 
 const Tabs = {
@@ -84,18 +92,19 @@ const MainNavigator = createAppContainer(createStackNavigator({
         })
     },
     AddCard: {
-        screen: AddCard
+        screen: AddCard,
+        navigationOptions: sharedHeaderStyle
     },
     Quiz: {
         screen: Quiz,
+        navigationOptions: sharedHeaderStyle
+
     }
 }))
 
 class Main extends React.Component {
 
     render() {
-        console.log(this.props.navigation);
-
         return (
 
             <View style={{ flex: 1 }}>
@@ -107,9 +116,9 @@ class Main extends React.Component {
     }
 }
 
-const mapStateToProps = ({ entries }) => {
+const mapStateToProps = ({ decks }) => {
     return {
-        entries
+        decks
     }
 }
 export default connect(mapStateToProps)(Main)

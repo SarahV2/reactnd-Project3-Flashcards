@@ -4,6 +4,8 @@ import { Styles } from '../utils/styles'
 import { getDeck } from '../utils/api'
 import { connect } from 'react-redux'
 import Button from './Button'
+import { clearLocalNotification, setLocalNotification } from '../utils/notificationManager'
+
 class Quiz extends Component {
     state = {
         showAnswer: false,
@@ -55,6 +57,10 @@ class Quiz extends Component {
         const { remainingQuestions } = this.state
         if (remainingQuestions === 0) {
             this.setState({ showScore: true })
+
+            // if the user completed a quiz for today, set notification for tomorrow
+            clearLocalNotification()
+                .then(setLocalNotification)
         }
         else {
             this.getNextQuestion()

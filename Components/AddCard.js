@@ -59,7 +59,7 @@ class AddCard extends Component {
     render() {
         return (
             <KeyboardAvoidingView behavior='padding' style={Styles.container}>
-                <Text>Add a new question</Text>
+                <Text style={{ fontSize: 20, marginBottom: 10 }}>Add a new question</Text>
 
                 <TextInput onChangeText={(text) => { this.handleChange(text, 'question') }}
                     style={Styles.inputField} placeholder='New Question'
