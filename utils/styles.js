@@ -78,5 +78,11 @@ export const Styles = StyleSheet.create({
     quizHeader:{
         fontSize:30,
         marginTop:50
+    },
+    score:{
+        fontSize:20,
+        fontWeight:'bold',
+        marginTop:50,
+        marginBottom:5
     }
 });

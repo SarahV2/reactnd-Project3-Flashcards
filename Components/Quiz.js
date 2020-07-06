@@ -9,22 +9,22 @@ class Quiz extends Component {
         showAnswer: false,
         correctAnswers: 0,
         numOfAnsweredQ: 0,
-        deck: {},
+
+        title: '',
         questions: [],
-        numOfCards: 0,
+
         remainingQuestions: 0,
         currentQuestion: {},
         score: 0,
-        showScore:false
+        showScore: false
     }
 
     componentDidMount() {
         const { title } = this.props
         getDeck(title).then(result => {
             this.setState({
-                deck: result,
+                title: result.title,
                 questions: result.questions,
-                numOfCards: result.questions.length,
                 remainingQuestions: result.questions.length,
                 currentQuestion: result.questions[0]
             })
@@ -36,39 +36,91 @@ class Quiz extends Component {
     }
 
     handleCorrectAnswer = () => {
-        this.setState({
 
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                correctAnswers: prevState.correctAnswers + 1,
+                numOfAnsweredQ: prevState.numOfAnsweredQ + 1,
+                score: prevState.score + 1,
+                remainingQuestions: prevState.remainingQuestions - 1,
+                showAnswer: !prevState.showAnswer
+            }
         })
+        const { remainingQuestions } = this.state
+        if (remainingQuestions === 1) {
+            this.setState({ showScore: true })
+        }
+        else {
+            this.getNextQuestion()
+        }
+
     }
     handleIncorrectAnswer = () => {
 
     }
 
+    getNextQuestion = () => {
+        const { questions, currentQuestion } = this.state
+        let index = questions.indexOf(currentQuestion)
+
+        this.setState({ currentQuestion: questions[index + 1] })
+    }
+
+    reset = () => {
+        const { questions } = this.state
+        this.setState({
+            currentQuestion: questions[0],
+            score: 0,
+            showScore: false,
+            remainingQuestions: questions.length,
+            correctAnswers: 0,
+            numOfAnsweredQ: 0
+        })
+    }
+
+    toDeck = (title) => {
+        this.props.navigation.navigate(
+            'Deck',
+            { title }
+        )
+    }
     render() {
-        const { questions, showAnswer, deck, currentQuestion, remainingQuestions,showScore } = this.state
+        const { showAnswer, title, questions, currentQuestion, remainingQuestions, showScore, score } = this.state
+
         return (
             <View style={{ flex: 1, alignItems: 'center' }}>
                 <Text style={Styles.quizHeader}>Quiz</Text>
-                <Text style={Styles.title}>{deck.title}</Text>
+                <Text style={Styles.title}>{title}</Text>
 
                 <View style={{ flex: 1, alignItems: 'center' }}>
-                    <Text style={{padding:10,fontSize:20,fontWeight:'bold'}}>Q:{currentQuestion.question}</Text>
-
-                    {showAnswer === false &&
+                    {showScore === false &&
+                        <Text style={{ padding: 10, fontSize: 20, fontWeight: 'bold' }}>Q:{currentQuestion.question}</Text>
+                    }
+                    {(showAnswer === false && showScore === false) &&
                         <Button text='Show Answer' color='rgba(255,0,0)' onPress={this.showAnswer} />
 
                     }
                     {showAnswer == true && (
                         <View style={{ flex: 1, alignItems: 'center' }}>
-                            <Text style={{padding:10,fontSize:20}}>{currentQuestion.answer}</Text>
+                            <Text style={{ padding: 10, fontSize: 20 }}>{currentQuestion.answer}</Text>
                             <Button text='Correct' backgroundColor='rgb(0,255,50)' onPress={this.handleCorrectAnswer} />
                             <Button text='Incorrect' backgroundColor='rgb(255,0,0)' onPress={this.handleIncorrectAnswer} />
 
                         </View>
                     )}
 
+                    {showScore == false && (
+                        <Text>{remainingQuestions} questions remaining</Text>
+                    )}
+
                     {showScore == true && (
-                        <Text>Score</Text>
+                        <View style={{ flex: 1, alignItems: 'center' }}>
+                            <Text style={Styles.score}>Score</Text>
+                            <Text style={[Styles.score, { marginTop: 0 }]}>{score}/{questions.length}</Text>
+                            <Button text='Restart' onPress={this.reset} />
+                            <Button text='Go Back' onPress={() => this.toDeck(title)} />
+                        </View>
                     )}
                 </View>
 
