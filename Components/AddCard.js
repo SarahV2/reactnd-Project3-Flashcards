@@ -95,7 +95,6 @@ const mapStateToProps = (state, { navigation }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-
     dispatch
 })
 
