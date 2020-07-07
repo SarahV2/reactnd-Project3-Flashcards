@@ -4,7 +4,6 @@ import { Styles } from '../utils/styles'
 
 export default function Button(props) {
     const { text, color, onPress, backgroundColor } = props
-    console.log(text)
     return (
         <TouchableOpacity style={[Styles.button, { backgroundColor}]} onPress={onPress}>
             <Text style={Styles.buttonText}>{text}</Text>

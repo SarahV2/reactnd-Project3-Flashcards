@@ -28,6 +28,13 @@ class Deck extends Component {
             { title })
     }
 
+    // Displays an alert when the user tries to start a quiz from a deck
+    // that has less than two cards
+
+    handleError = () => {
+        alert('You need at least two cards in the deck to start a quiz')
+    }
+
     render() {
         const { title } = this.props
         const { numOfCards } = this.props
@@ -41,10 +48,11 @@ class Deck extends Component {
                     <Text style={Styles.button}>Add Card</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={this.startQuiz} >
-                    {numOfCards > 1 &&
-                        <Text style={[Styles.button, { backgroundColor: '#000000', color: '#FFFFFF' }]} >Start Quiz</Text>}
+
+                <TouchableOpacity onPress={numOfCards >=2 ? this.startQuiz : this.handleError} >
+                    <Text style={[Styles.button, { backgroundColor: '#000000', color: '#FFFFFF' }]} >Start Quiz</Text>
                 </TouchableOpacity>
+
 
 
             </View>

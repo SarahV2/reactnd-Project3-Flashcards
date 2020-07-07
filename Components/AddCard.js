@@ -10,7 +10,10 @@ class AddCard extends Component {
     state = {
         question: '',
         answer: '',
-        newDeckName: ''
+        newDeckName: '',
+        inputError: false,
+        invalidValue: ''
+
     }
     static navigationOptions = ({ navigation }) => {
         const { title } = navigation.state.params
@@ -20,7 +23,7 @@ class AddCard extends Component {
     }
 
     handleChange = (text, name) => {
-        this.setState({ [name]: text })
+        this.setState({ [name]: text, inputError: false })
     }
 
     handlePress = async () => {
@@ -28,26 +31,40 @@ class AddCard extends Component {
         const { dispatch } = this.props
         const { question, answer } = this.state
         const { title } = this.props
+        if (!!question.trim() && !!answer.trim()) {
+            const card = {
+                question,
+                answer
+            }
 
-        const card = {
-            question,
-            answer
+            // Save to Storage
+            await addCardToDeck(title, card)
+
+            // Update Redux
+            await dispatch(addCard(title, card))
+
+            // Empty Input Fields and reset the error state
+            this.setState({
+                question: '',
+                answer: '',
+                inputError: false,
+                invalidValue: ''
+            })
+
+            // Navigate back to the deck screen
+            this.toHome(title)
         }
+        else {
+            this.setState({ inputError: true })
 
-        // Save to Storage
-        await addCardToDeck(title, card)
-
-        // Update Redux
-        await dispatch(addCard(title, card))
-
-        // Empty Input Fields
-        this.setState({
-            question: '',
-            answer: ''
-        })
-
-        // Navigate back to the deck screen
-        this.toHome(title)
+            // Check which input field (state) is causing the issue and then reset its value
+            if (!(!!question.trim())) {
+                this.setState({ question: '', invalidValue: 'question' })
+            }
+            else {
+                this.setState({ answer: '', invalidValue: 'answer' })
+            }
+        }
     }
     toHome = (title) => {
         this.props.navigation.navigate(
@@ -57,13 +74,14 @@ class AddCard extends Component {
     }
 
     render() {
+        const { inputError, invalidValue } = this.state
         return (
             <KeyboardAvoidingView behavior='padding' style={Styles.container}
                 keyboardVerticalOffset={Platform.select({ ios: 120, android: 500 })}
                 enabled>
                 <View style={Styles.container}>
                     <Text style={{ paddingTop: 30, marginTop: 10, fontSize: 20, padding: 10 }}>Add a new question</Text>
-
+                    {inputError && (<Text style={{ color: 'rgb(255,0,0)' }}>Please Enter a valid {invalidValue} </Text>)}
                     <TextInput onChangeText={(text) => { this.handleChange(text, 'question') }}
                         style={Styles.inputField} placeholder='New Question'
                         value={this.state.question}
