@@ -3,7 +3,7 @@
  
  
  ## About
-This app was created using ```create-react-native-app``` and tested using expo on ios
+This app was created using ```create-react-native-app```
 
  ## Installation & Run
 * Install the project dependencies by using the command ```yarn install``` in the terminal
@@ -17,3 +17,5 @@ The app allows the users to do the following:
 * Add cards to decks
 * Take a quiz in a chosen category (deck) and get a score
 
+## Testing
+The app was tested using expo on ios platform
